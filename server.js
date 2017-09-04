@@ -1,13 +1,10 @@
 var express = require('express');
+var bodyparser = require('body-parser');
 var recipes = require('./routes/recipes');
 
 var app = express();
 
-app.configure(function() {
-	app.use(express.static('static'));
-	app.use(express.logger('dev'));	/* 'default', 'short', 'tiny', 'dev' */
-	app.use(express.bodyParser());
-}
+app.use(express.static('static'));
 
 // my static photography website
 app.get('/', function(req, res){

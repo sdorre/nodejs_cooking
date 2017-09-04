@@ -4,6 +4,7 @@
   "description": "my home server interacting with my static website and the family cooking database",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "mongodb": "^2.2.31"
   },
