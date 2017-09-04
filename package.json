@@ -1,0 +1,21 @@
+{
+  "name": "cook_family",
+  "version": "1.0.0",
+  "description": "my home server interacting with my static website and the family cooking database",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/sdorre/nodejs_cooking"
+  },
+  "author": "",
+  "license": "MIT"
+}
