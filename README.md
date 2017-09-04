@@ -2,15 +2,15 @@
 
 This nodeJS server will provide a REST Api that save and provide the recipes from the whole family.
 
-# NodeJS Server
+## NodeJS Server
 
 Providing a REST Api.
 Authentication. With Facebook or simple Local User databse
 
-#Qt Application 
+## Qt Application 
 
 Multi platform (Android, PC and iOS)
 
-#WebApplication (maybe)
+## WebApplication (maybe)
 
 That let the user access the database directly from the web
