@@ -25,9 +25,9 @@ exports.findAll = function(req, res) {
 		collection.find().toArray(function(err, items) {
 			//res.send(items);
 			if (err) {
-				res.json(500, {'error':'Error occurred while trying to fetch all recipes'});
+				res.status(500).json({'error':'Error occurred while trying to fetch all recipes'});
 			} else {
-				res.json(200, items);
+				res.status(200).json(items);
 			}
 		});
 	});
@@ -37,15 +37,19 @@ exports.findById = function(req, res) {
 	var id = req.params.id;
 	console.log("Retrieving recipe: " + id);
 	db.collection('recipes', function(err, collection) {
-                collection.find({'_id':new BSON.ObjectID(id)}).toArray(function(err, items) {
+		if (err) {
+               		res.status(500).json({'error':'An error has occurred - ' + err});
+		} else {
+	               collection.find({'_id':new BSON.ObjectID(id)}).toArray(function(err, items) {
                         if (err) {
-                                res.json(500, {'error':'An error has occurred - ' + err});
+                                res.status(500).json({'error':'An error has occurred - ' + err});
                         } else if (items.length < 1) {
-                                res.json(404, {'error':'recipe not found id:' + id});
+                                res.status(404).json({'error':'recipe not found id:' + id});
                         } else {
-				res.json(200, item[0]);
+				res.status(200).json(item[0]);
 			}
 		});
+		}
 	});
 };
 
@@ -55,10 +59,10 @@ exports.addRecipe = function(req, res) {
 	db.collection('recipes', function(err, collection) {
 		collection.insert(recipe, {safe:true}, function(err, result) {
 			if (err) {
-				res.json(500, {'error':'An error occurred'});
+				res.status(500).json({'error':'An error occurred'});
 			} else {
 				console.log('Success: '+JSON.stringify(result[0]));
-				res.json(201, result[0]);
+				res.status(500).json(201, result[0]);
 			}
 		});
 	});
@@ -73,17 +77,17 @@ exports.updateRecipe = function(req, res) {
 	db.collection('recipes', function(err, collection) {
 		collection.find({'_id':new BSON.ObjectID(id)}).toArray(function(err, items) {
 			if (err) {
-				res.json(500, {'error':'An error has occurred - ' + err});
+				res.status(500).json({'error':'An error has occurred - ' + err});
 			} else if (items.length < 1) {
-				res.json(404, {'error':'recipe not found id:' + id});
+				res.status(404).json({'error':'recipe not found id:' + id});
 			} else {
 				collection.update({'_id':new BSON.ObjectID(id)}, recipe, {safe:true}, function(err, result) {
 					if (err) {
 						console.log('Error updating recipe: ' + err);
-						res.json(500, {'error':'An error has occurred'});
+						res.status(500).json({'error':'An error has occurred'});
 					} else {
 						console.log('' + result + ' document(s) updated');
-						res.json(200, recipe);
+						res.status(200).json(recipe);
 					}
 				});
 			}
@@ -97,21 +101,21 @@ exports.deleteRecipe = function(req, res) {
 	db.collection('recipes', function(err, collection) {
 		collection.find({'_id':new BSON.ObjectID(id)}).toArray(function(err, items) {
 			if (err) {
-				res.json(500, {'error':'An error has occurred - ' + err});
+				res.status(500).json({'error':'An error has occurred - ' + err});
 			} else if (items.length < 1) {
-				res.json(404, {'error':'recipe not found id:' + id});
+				res.status(404).json({'error':'recipe not found id:' + id});
 			} else {
 				collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
 					if (err) {
-						res.json(500, {'error':'An error has occurred - ' + err});
+						res.status(500).json({'error':'An error has occurred - ' + err});
 					} else {
 						console.log('' + result + ' recipes(s) deleted');
 						//res.send(req.body);
-						res.json(204);
+						res.status(204);
 					}
-				}
-			});
-		};
+				});
+			}
+		});
 	});
 }
 

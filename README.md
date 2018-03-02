@@ -14,3 +14,9 @@ Multi platform (Android, PC and iOS)
 ## WebApplication (maybe)
 
 That let the user access the database directly from the web
+
+
+setup on Ubuntu 16.04
+curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+sudo apt-get install nodejs
+:
