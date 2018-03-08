@@ -10,6 +10,8 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeCreateComponent } from './recipe-create/recipe-create.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 const appRoutes: Routes = [
     {
@@ -44,7 +46,9 @@ const appRoutes: Routes = [
         RecipeComponent,
         RecipeDetailComponent,
         RecipeCreateComponent,
-        RecipeEditComponent
+        RecipeEditComponent,
+        LoginComponent,
+        SignupComponent
     ],
     imports: [
         BrowserModule,

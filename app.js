@@ -3,7 +3,9 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var morgan = require('morgan');
 
+var config = require('./config/database');
 var recipe = require('./routes/recipe');
 var app = express();
 
@@ -12,6 +14,9 @@ mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/mean-cooking', { useMongoClient: true, promiseLibrary: require('bluebird') })
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
+
+var passport = require('passport');
+app.use(passport.initialize());
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

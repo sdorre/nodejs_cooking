@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
     selector: 'app-recipe',
@@ -15,10 +15,22 @@ export class RecipeComponent implements OnInit {
     constructor(private http: HttpClient) { }
 
     ngOnInit() {
-        this.http.get('/recipe').subscribe(data => {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') });
+        }
+        this.http.get('/recipe', httpOptions).subscribe(data => {
             console.log(data);
             this.recipes = data;
+        }, err => {
+            if (err.status === 401) {
+                this.router.navigate(['login']);
+            }    
         });
+    }
+
+    logout() {
+        localStorage.removeItem('jwtToken');
+        this.router.navigate(['login']);
     }
 }
 
