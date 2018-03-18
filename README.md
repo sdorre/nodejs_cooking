@@ -1,16 +1,30 @@
 # FAMILY COOKING RECIPE DATABASE
 
 This nodeJS server will provide a REST Api that save and provide the recipes from the whole family.
+MEAN implementation using Passport for authentication
 
 ## NodeJS Server
 
-Providing a REST Api.
-Authentication. With Facebook or simple Local User databse
+### REST Api.
+
+- /signin
+- /signup
+- /recipe : GET and POST
+- /recipe/id : GET, PUT and DELETE
+
+Authentication is using JWT with the library Passport. User are stored in the local database.
 
 ## Qt Application 
 
 Multi platform (Android, PC and iOS)
 
-## WebApplication (maybe)
+## WebApplication
 
-That let the user access the database directly from the web
+The Interface is provided by Angular5. 
+
+### TODO
+- enable HTTPS
+- hash user and password when transmitting (registration AND log in)
+- improve interface design
+- authentication is 'only' used for the REST api. User can request all urls without being redirected to the login page if the token is null.
+ 
