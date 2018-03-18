@@ -1,0 +1,36 @@
+<div class="container">
+    <h1>{{ recipe.name }}</h1>
+    <dl class="list">
+        <dt>Author</dt>
+        <dd>{{ recipe.author }}</dd>
+        <dt>Duration</dt>
+        <dd>{{ recipe.duration }}</dd>
+        <dt>Temperature</dt>
+        <dd>{{ recipe.temperature }}</dd>
+        <dt>Ingredients</dt>
+        <dd>
+            <ul>
+                <li *ngFor="let ingredient of recipe.ingredients">
+                    {{ ingredient.name }} 
+                </li>
+            </ul>
+        </dd>
+
+        <dt>Instructions</dt>
+        <dd>
+            <ul>
+                <li *ngFor="let instruction of recipe.instructions">
+                    {{ instruction.desc }}
+                </li>
+            </ul>
+        </dd>
+        <dt>Update Date</dt>
+        <dd>{{ recipe.updated_date | date:'short'}}</dd>
+    </dl>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <a [routerLink]="['/recipe-edit', recipe._id]" class="btn btn-success">EDIT</a>
+        <button class="btn btn-danger" type="button" (click)="deleteRecipe(recipe._id)">DELETE</button>
+    </div>
+</div>

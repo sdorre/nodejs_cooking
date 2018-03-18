@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>Edit Recipe</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <form (ngSubmit)="updateRecipe(recipe._id)" #recipeForm="ngForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="recipe.name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Author</label>
+                    <input type="text" class="form-control" [(ngModel)]="recipe.author" name="author" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Duration</label>
+                    <input type="number" class="form-control" [(ngModel)]="recipe.duration" name="duration" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Temperature</label>
+                    <input type="number" class="form-control" [(ngModel)]="recipe.temperature" name="temperature" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success" [disabled]="!recipeForm.form.valid">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
