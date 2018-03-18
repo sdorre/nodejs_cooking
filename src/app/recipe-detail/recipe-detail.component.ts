@@ -24,7 +24,6 @@ export class RecipeDetailComponent implements OnInit {
         };
         this.http.get('/api/recipe/'+id, httpOptions).subscribe(data => {
             this.recipe = data;
-            console.log(data);
         });
     }
 

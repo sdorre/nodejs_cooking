@@ -20,9 +20,9 @@ export class RecipeComponent implements OnInit {
             headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
         }
         this.http.get('/api/recipe', httpOptions).subscribe(data => {
-            console.log(data);
             this.recipes = data;
         }, err => {
+            console.log("STEF - err:" + err);
             if (err.status === 401) {
                 this.router.navigate(['login']);
             }    

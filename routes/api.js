@@ -55,13 +55,13 @@ router.post('/signin', function(req, res) {
 /* GET ALL RECIPES */
 router.get('/recipe', function(req, res, next) {
     var token = getToken(req.headers);
+    console.log("STEF - token ?:" + token);
     if (token) {
         Recipe.find(function (err, products) {
             if (err) return next(err);
             res.json(products);
         });
     } else {
-        console.log("STEF -o nest là");
         return res.status(403).send({success: false, msg: 'Unauthorized'});
     }
 });
@@ -84,12 +84,10 @@ router.post('/recipe', function(req, res, next) {
     var token = getToken(req.headers);
     if (token) {
         Recipe.create(req.body, function (err, post) {
-            console.log("creating Recipe : err:" + err);
             if (err) return next(err);
             res.json(post);
         });
     } else {
-        console.log("creating recipe no token found == unauthorized");
         return res.status(403).send({success: false, msg: 'Unauthorized'}); 
     }
 });
