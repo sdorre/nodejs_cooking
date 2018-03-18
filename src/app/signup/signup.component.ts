@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
     ngOnInit() {
     }
 
-    singup() {
+    signup() {
         this.http.post('/api/signup', this.signupData).subscribe(resp => {
             console.log(resp);
             this.router.navigate(['login']);

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -15,19 +15,24 @@ export class RecipeDetailComponent implements OnInit {
     constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
 
     ngOnInit() {
-        console.log("PLOP");
         this.getRecipeDetail(this.route.snapshot.params['id']);
     }
 
     getRecipeDetail(id) {
-        this.http.get('/recipe/'+id).subscribe(data => {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+        };
+        this.http.get('/api/recipe/'+id, httpOptions).subscribe(data => {
             this.recipe = data;
             console.log(data);
         });
     }
 
     deleteRecipe(id) {
-        this.http.delete('/recipe/'+id)
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+        };
+        this.http.delete('/api/recipe/'+id, httpOptions)
             .subscribe(res => {
                 this.router.navigate(['/recipes']);
               }, (err) => {

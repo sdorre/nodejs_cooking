@@ -53,7 +53,7 @@ router.post('/signin', function(req, res) {
 });
 
 /* GET ALL RECIPES */
-router.get('/', function(req, res, next) {
+router.get('/recipe', function(req, res, next) {
     var token = getToken(req.headers);
     if (token) {
         Recipe.find(function (err, products) {
@@ -61,12 +61,13 @@ router.get('/', function(req, res, next) {
             res.json(products);
         });
     } else {
+        console.log("STEF -o nest là");
         return res.status(403).send({success: false, msg: 'Unauthorized'});
     }
 });
 
 /* GET SINGLE BOOK BY ID */
-router.get('/:id', function(req, res, next) {
+router.get('/recipe/:id', function(req, res, next) {
     var token = getToken(req.headers);
     if (token) {
         Recipe.findById(req.params.id, function (err, post) {
@@ -79,20 +80,22 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* SAVE BOOK */
-router.post('/', function(req, res, next) {
+router.post('/recipe', function(req, res, next) {
     var token = getToken(req.headers);
     if (token) {
         Recipe.create(req.body, function (err, post) {
+            console.log("creating Recipe : err:" + err);
             if (err) return next(err);
             res.json(post);
         });
     } else {
+        console.log("creating recipe no token found == unauthorized");
         return res.status(403).send({success: false, msg: 'Unauthorized'}); 
     }
 });
 
 /* UPDATE BOOK */
-router.put('/:id', function(req, res, next) {
+router.put('/recipe/:id', function(req, res, next) {
     var token = getToken(req.headers);
     if (token) {
         Recipe.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
@@ -105,7 +108,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 /* DELETE BOOK */
-router.delete('/:id', function(req, res, next) {
+router.delete('/recipe/:id', function(req, res, next) {
     var token = getToken(req.headers);
     if (token) {
         Recipe.findByIdAndRemove(req.params.id, req.body, function (err, post) {

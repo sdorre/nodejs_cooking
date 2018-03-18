@@ -34,7 +34,18 @@ const appRoutes: Routes = [
         component: RecipeEditComponent,
         data: { title: 'Edit Recipe' }
     },
-        { path: '',
+    {
+        path: 'login',
+        component: LoginComponent,
+        data: { title: 'Login' }
+    },
+    {
+        path: 'signup',
+        component: SignupComponent,
+        data: { title: 'Sign up' }
+    },
+    { 
+        path: '',
         redirectTo: '/recipes',
         pathMatch: 'full'
     }

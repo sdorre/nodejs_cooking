@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
     selector: 'app-recipe-edit',
@@ -19,15 +19,21 @@ export class RecipeEditComponent implements OnInit {
     }
 
     getRecipe(id) {
-        this.http.get('/recipe/'+id)
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+        }
+        this.http.get('/api/recipe/'+id, httpOptions)
             .subscribe(data => {
                 this.recipe = data;
             });
     }
 
     updateRecipe(id) {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+        }
         this.recipe.updated_date = Date.now();
-        this.http.put('/recipe/'+id, this.recipe)
+        this.http.put('/api/recipe/'+id, this.recipe, httpOptions)
             .subscribe(res => {
                 let id = res['_id'];
                 this.router.navigate(['recipe-details', id]);
